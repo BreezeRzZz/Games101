@@ -300,6 +300,7 @@ if (isMultiThreads)
 参考：
 1. <https://sites.cs.ucsb.edu/~lingqi/teaching/resources/GAMES101_Lecture_17.pdf>
 2. <https://zhuanlan.zhihu.com/p/152226698>
+3. <https://blog.csdn.net/qq_41835314/article/details/125362634>
 
 我们在渲染方程部分使用BRDF，即$f_r$来计算人眼从某个方向接收到的光线，但问题在于，$f_r$这个系数是怎么计算的呢？
 查看eval函数，其给出的结果是：
@@ -329,4 +330,9 @@ L_o(\omega_o)=\int_{H^2}f_rL_i(\omega_i)\cos\theta_id\omega_i\\
 $$
 所以我们定义$f_r=\cfrac{\rho}{\pi}$，$\rho$为系数。
 本提高部分探讨的微表面材质准确来说为Cook–Torrance光照模型。在前面的实验中，所有的物体材质都是漫反射，没有对镜面反射进行支持。
-（待续）
+对于cook-Torrance光照模型来讲，其综合考虑了漫反射和镜面反射的影响。具体原理参考给出的链接，这里不再赘述。
+主要在material.hpp中进行修改，添加相应的Microfacet材质内容。
+因为这部分内容我不太懂，基本是照抄的别人代码，就不写了。
+结果:
+spp=512,roughness=0.8,Kd=(0.5,0.5,0.5),Ks=(0.8,0.8,0.8)
+![](microfacet.jpg)
